@@ -11,6 +11,7 @@ namespace DragonAPI.Controllers;
 [Route("dragon")]
 public class DragonController : ControllerBase
 {
+    // JWT values
     private static readonly IConfiguration JwtConfig = Configuration.GetConfig().GetSection("JWT");
     private static readonly SymmetricSecurityKey JwtKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtConfig["Key"] ?? throw new Exception("Invalid appsettings.json")));
     private static readonly double JwtLifetime = Double.Parse(JwtConfig["Lifetime"] ?? throw new Exception("Invalid appsettings.json"));
@@ -29,7 +30,6 @@ public class DragonController : ControllerBase
         "Realm of the Fire Dragon",
     };
 
-    // TODO: Implememnt JWT
     [Authorize]
     [HttpGet("dragontunes")]
     public string[] GetDragonMusic()
